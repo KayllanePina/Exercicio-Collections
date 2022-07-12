@@ -2,7 +2,7 @@ package Set;
 
 /* Crie uma classe LinguagemFavorita qe possua os atributos nome, anoDeCriacao, e ide. Em seguida crie um conjunto com 3 linguagens e faça um programa que ordene esse conjunto por:
  * A. Ordem de Inserção
- * B. Ordem Natural
+ * B. Ordem Natural (nome)
  * C. IDE
  * D. Ano de criação e nome
  * E. Nome, ano de criação e IDE
@@ -15,120 +15,157 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class exercicio01 {
+
     public static void main(String[] args) {
-        System.out.println("A. Ordem de Inserção");
-        Set<LinguagemFavorita> linguagemFavorita = new LinkedHashSet(){{
+
+        System.out.println("A. Ordene o conjunto por Ordem de Inserção: ");
+        Set<LinguagemFavorita> linguagens = new LinkedHashSet(){{
             add(new LinguagemFavorita("Java", 1991, "Intellij"));
-            add(new LinguagemFavorita("C", 1972, "JetBrains"));
+            add(new LinguagemFavorita("Node", 1995, "VisualStudioCode"));
             add(new LinguagemFavorita("Python", 1990, "PyCharm"));
         }};
-        for (LinguagemFavorita linguagens : linguagemFavorita) {
-            System.out.println(linguagens.getNome() + " - " + linguagens.getAnoDeCriacao() + " - " + linguagens.getIde());
+
+        for (LinguagemFavorita linguagem : linguagens) {
+            System.out.println(linguagem.getNome() + " - " + linguagem.getAnoDeCriacao() + " - " + linguagem.getIDE());
         }
 
-        System.out.println("\nB. Ordem Natural");
-
-        System.out.println("\nC. IDE");
-        Set<LinguagemFavorita> ides = new TreeSet<>(new ComparatorIDE());
-        ides.addAll(linguagemFavorita);
-        for (LinguagemFavorita ide : ides) {
-            System.out.println(ide.getNome() + " - " + ide.getAnoDeCriacao() + " - " + ide.getIde());
+        System.out.println("\nB. Ordene o conjunto por Ordem Natural(nome):");
+        Set<LinguagemFavorita> ordemNatural = new TreeSet<>(linguagens);
+        for ( LinguagemFavorita ordem : ordemNatural ){
+            System.out.println(ordem.getNome() + " - " + ordem.getAnoDeCriacao() + " - " + ordem.getIDE());
         }
 
-        System.out.println("\nD. Ano e criação e nome");
-        Set<LinguagemFavorita> anoDeCriacaoENome = new TreeSet<>(new ComparatorAnoDeCriacaoENome());
-        anoDeCriacaoENome.addAll(linguagemFavorita);
-        for (LinguagemFavorita anoEcriacao : anoDeCriacaoENome) {
-            System.out.println(anoEcriacao.getNome() + " - " + anoEcriacao.getAnoDeCriacao() + " - " + anoEcriacao.getIde());
+        System.out.println("\nC. Ordene o conjunto por Ordem de IDE:");
+        Set<LinguagemFavorita> ide = new TreeSet<>(new ComparatorIDE());
+        ide.addAll(linguagens);
+
+        for ( LinguagemFavorita ides : ide) {
+            System.out.println(ides.getNome() + " - " + ides.getAnoDeCriacao() + " - " + ides.getIDE());
+        }
+
+        System.out.println("\nD. Ordene o conjunto por Ordem de Ano e Nome:");
+        Set<LinguagemFavorita> anoENome = new TreeSet<>(new ComparatorAnoENome());
+        anoENome.addAll(linguagens);
+
+        for ( LinguagemFavorita anoEnome : anoENome) {
+            System.out.println(anoEnome.getNome() + " - " + anoEnome.getAnoDeCriacao() + " - " + anoEnome.getIDE());
         }
 
 
-        System.out.println("\nE. Nome, ano de criação e IDE");
-        Set<LinguagemFavorita> nomeAnoIde = new TreeSet<>(new ComparatorNomeAnoIde());
-        nomeAnoIde.addAll(linguagemFavorita);
-        for (LinguagemFavorita nomeAnoIdes : nomeAnoIde) {
-            System.out.println(nomeAnoIdes.getNome() + " - " + nomeAnoIdes.getAnoDeCriacao() + " - " + nomeAnoIdes.getIde());
+        System.out.println("\nE. Ordene o conjunto por Ordem de Nome, Ano e IDE:");
+        Set<LinguagemFavorita> nomeAnoEide = new TreeSet<>(new ComparatorNomeAnoIde());
+        nomeAnoEide.addAll(linguagens);
+
+        for ( LinguagemFavorita nomeAnoEides : nomeAnoEide) {
+            System.out.println(nomeAnoEides.getNome() + " - " + nomeAnoEides.getAnoDeCriacao() + " - " + nomeAnoEides.getIDE());
         }
     }
 }
 
-class LinguagemFavorita implements  Comparable<LinguagemFavorita>{
+class LinguagemFavorita implements Comparable<LinguagemFavorita>{
     private String nome;
     private Integer anoDeCriacao;
-    private String ide;
+    private String IDE;
 
-    public LinguagemFavorita(String nome, Integer anoDeCriacao, String ide) {
+    public LinguagemFavorita(String nome, Integer anoDeCriacao, String IDE) {
+
         this.nome = nome;
         this.anoDeCriacao = anoDeCriacao;
-        this.ide = ide;
+        this.IDE = IDE;
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 
     public Integer getAnoDeCriacao() {
+
         return anoDeCriacao;
     }
 
     public void setAnoDeCriacao(Integer anoDeCriacao) {
+
         this.anoDeCriacao = anoDeCriacao;
     }
 
-    public String getIde() {
-        return ide;
+    public String getIDE() {
+
+        return IDE;
     }
 
-    public void setIde(String ide) {
-        this.ide = ide;
+    public void setIDE(String IDE) {
+
+        this.IDE = IDE;
     }
 
     @Override
     public String toString() {
-        return  "nome='" + nome + '\'' +
-                ", anoDeCriacao=" + anoDeCriacao +
-                ", ide='" + ide + '\'';
+
+        return "Linguagem Favorita: " +
+                "nome = '" + nome + '\'' +
+                ", anoDeCriacao = " + anoDeCriacao +
+                ", IDE = '" + IDE + '\'';
     }
 
     @Override
     public int compareTo(LinguagemFavorita o) {
-        return 0;
+
+        return this.nome.compareTo(o.nome);
     }
 }
 
-class ComparatorIDE implements Comparator<LinguagemFavorita>{
+class ComparatorNome implements  Comparator<LinguagemFavorita>{
+
     @Override
     public int compare(LinguagemFavorita o1, LinguagemFavorita o2) {
-        int ide = o1.getIde().compareTo(o2.getIde());
-        return ide;
-    }
-}
-
-class ComparatorAnoDeCriacaoENome implements Comparator<LinguagemFavorita>{
-    @Override
-    public int compare(LinguagemFavorita o1, LinguagemFavorita o2) {
-        int anoDeCriacao = o1.getAnoDeCriacao().compareTo(o2.getAnoDeCriacao());
-        if (anoDeCriacao != 0) return anoDeCriacao;
-
         int nome = o1.getNome().compareTo(o2.getNome());
         return nome;
     }
 }
 
+class ComparatorIDE implements Comparator<LinguagemFavorita>{
+
+    @Override
+    public int compare(LinguagemFavorita o1, LinguagemFavorita o2) {
+        int ide = o1.getIDE().compareTo(o2.getIDE());
+        return ide;
+    }
+
+
+}
+
+class ComparatorAnoENome implements Comparator<LinguagemFavorita>{
+
+    @Override
+    public int compare(LinguagemFavorita o1, LinguagemFavorita o2) {
+        int ano = o1.getAnoDeCriacao().compareTo(o2.getAnoDeCriacao());
+        if(ano != 0) return ano;
+
+        int nome = o1.getNome().compareTo(o2.getNome());
+        if (nome != 0) return nome;
+
+        int ide = o1.getIDE().compareTo(o2.getIDE());
+        return ide;
+    }
+}
+
 class ComparatorNomeAnoIde implements Comparator<LinguagemFavorita>{
+
     @Override
     public int compare(LinguagemFavorita o1, LinguagemFavorita o2) {
         int nome = o1.getNome().compareTo(o2.getNome());
         if (nome != 0) return nome;
 
-        int anoDeCriacao = o1.getAnoDeCriacao().compareTo(o2.getAnoDeCriacao());
-        if (anoDeCriacao != 0) return anoDeCriacao;
+        int ano = o1.getAnoDeCriacao().compareTo(o2.getAnoDeCriacao());
+        if(ano != 0) return ano;
 
-        int ide = o1.getIde().compareTo(o2.getIde());
+        int ide = o1.getIDE().compareTo(o2.getIDE());
         return ide;
     }
 }
