@@ -19,12 +19,7 @@ Estado = RN - População = 3.534.265
 - Remova os estados com a população menor que 4.000.000
 - Apague o dicionário de estados
 - Confira se o dicionário está vazio
-
-
---- Desafio ---
-Faça um programa que simule um lançamento de dados.
-Lance o dado 100 vezes e armazene.
-Depois, mostre quantas vezes cada valor foi inserido*/
+*/
 
 import java.util.Collections;
 import java.util.HashMap;
